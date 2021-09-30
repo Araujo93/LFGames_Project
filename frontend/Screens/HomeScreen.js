@@ -78,7 +78,7 @@ const HomeScreen = ({ navigation }) => {
           game.cover.url = `http://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg`;
         } else {
           game.cover = {
-            url: "hi",
+            url: "http://example.com",
           };
         }
       });
@@ -105,7 +105,7 @@ const HomeScreen = ({ navigation }) => {
           game.cover.url = `http://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg`;
         } else {
           game.cover = {
-            url: "hi",
+            url: "http://example.com",
           };
         }
       });
@@ -213,6 +213,15 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   icon: {
     paddingRight: 20,
+  },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
   },
 });
 

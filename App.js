@@ -76,19 +76,14 @@ const CustomDrawer = (props) => {
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
         <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: 20,
-          }}
+          style={styles.custom_drawer}
         >
           <Image
             source={require("./assets/Logo.jpeg")}
             style={{ width: 80, height: 80, borderRadius: 30 }}
           />
           <View> 
-          <Text style={{fontSize: 18, fontWeight: 'boldç'}}>{userName}</Text>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{userName}</Text>
           
           <Text>{email}</Text>
 
@@ -114,7 +109,7 @@ const CustomDrawer = (props) => {
   );
 };
 function App() {
-  const { isSuccess, isError, errorMessage, token, isFetching, isAuthenticated } = useSelector(authSelector);
+  const {  isFetching, isAuthenticated } = useSelector(authSelector);
   return (
     <SafeAreaProvider> 
     <MenuProvider>
@@ -152,6 +147,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+  },
+  custom_drawer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 20,
   },
   horizontal: {
     flexDirection: "row",

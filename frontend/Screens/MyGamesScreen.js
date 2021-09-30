@@ -55,7 +55,7 @@ const MyGamesScreen = (game, route) => {
       ) : (
         <FlatList
           data={userGames}
-          keyExtractor={(user, index) => index.toString()}
+          keyExtractor={(index) => index.toString()}
           renderItem={({ item }) => {
             return (
               <TouchableOpacity

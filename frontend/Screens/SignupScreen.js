@@ -18,15 +18,7 @@ const SignupScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Image
-          source={require("../../assets/Logo.jpeg")}
-          style={{
-            width: 90,
-            height: 90,
-            borderRadius: 30,
-            alignSelf: "center",
-          }}
-        />
+        <Image source={require("../../assets/Logo.jpeg")} style={styles.logo} />
         <Text h3 h3Style={styles.headerTitle}>
           Create New Account
         </Text>
@@ -88,7 +80,6 @@ const styles = StyleSheet.create({
   },
   link: {
     color: "#2e7eff",
-
     width: 200,
     alignSelf: "center",
     marginTop: 10,
@@ -103,6 +94,12 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     borderBottomColor: "black",
     borderBottomWidth: 1,
+  },
+  logo: {
+    width: 90,
+    height: 90,
+    borderRadius: 30,
+    alignSelf: "center",
   },
 });
 

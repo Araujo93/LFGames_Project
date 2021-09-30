@@ -41,7 +41,7 @@ const GameShow = ({ game, addGameToList, title, token }) => {
         }}
       >
         <Button
-          buttonStyle={styles.move}
+          buttonStyle={styles.add_btn}
           icon={<AntDesign name="plus" size={22} style={styles.btn_style} />}
           onPress={() => addGameToList({ ...game, token })}
         />
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     color: "white",
   },
-  move: {
+  add_btn: {
     width: 20,
     marginLeft: 50,
     backgroundColor: "#555c63",

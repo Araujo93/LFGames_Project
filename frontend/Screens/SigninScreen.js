@@ -5,7 +5,7 @@ import { Text, Button, Input } from "react-native-elements";
 import { View, SafeAreaView, StyleSheet, Image } from "react-native";
 import { authSelector } from "../redux/AuthSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { signInUser, clearState } from "../redux/AuthSlice";
+import { signInUser } from "../redux/AuthSlice";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const SigninScreen = ({ navigation }) => {
