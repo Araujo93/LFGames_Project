@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -15,42 +15,33 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { MenuProvider } from "react-native-popup-menu";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeScreen from "./frontend/Screens/HomeScreen";
 import GameDetailScreen from "./frontend/Screens/GameDetailsScreen";
 import SignupScreen from "./frontend/Screens/SignupScreen";
 import SigninScreen from "./frontend/Screens/SigninScreen";
 import MyGamesScreen from "./frontend/Screens/MyGamesScreen";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { Provider } from "react-redux";
-import { authSelector, authSlice } from "./frontend/redux/AuthSlice";
-import {
-  fetchUserByToken,
-  userSelector,
-  userSlice,
-} from "./frontend/redux/UserSlice";
-import { signOutUser, clearState } from "./frontend/redux/AuthSlice";
-import { getMyGameInfo } from "./frontend/redux/GameSlice";
-import store from "./frontend/redux/store";
+import { authSelector, userSelector } from "./frontend/redux/NewUserSlice";
+import { store } from './frontend/redux/store';
 import { useSelector, useDispatch } from "react-redux";
 import AccountScreen from "./frontend/Screens/AccountScreen";
 
 const Auth = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
+const isFetching = false;
 
-//AuthStack
 const AuthStack = () => (
   <Auth.Navigator>
     <Auth.Screen
-      name="signUp"
-      component={SignupScreen}
+      name="signIn"
+      component={SigninScreen}
       options={{ headerShown: false }}
     />
     <Auth.Screen
-      name="signIn"
-      component={SigninScreen}
+      name="signUp"
+      component={SignupScreen}
       options={{ headerShown: false }}
     />
   </Auth.Navigator>
@@ -71,7 +62,7 @@ const DrawerStack = () => (
 
 const CustomDrawer = (props) => {
   const dispatch = useDispatch();
-  const { email, userName, token } = useSelector(authSelector);
+  const { email, userName, token } = useSelector(userSelector);
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -82,9 +73,15 @@ const CustomDrawer = (props) => {
             source={require("./assets/Logo.jpeg")}
             style={{ width: 80, height: 80, borderRadius: 30 }}
           />
+<<<<<<< HEAD
           <View> 
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>{userName}</Text>
           
+=======
+          <View>
+          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{userName}</Text>
+
+>>>>>>> 15a6fc3b596094b7cbbfb333ca1ddff2dc8f7b14
           <Text>{email}</Text>
 
           </View>
@@ -100,8 +97,6 @@ const CustomDrawer = (props) => {
           backgroundColor: "#f6f6f6",
           padding: 20,
         }}
-        /// TODO LOGOUT a USER
-        onPress={() => dispatch(signOutUser(token))}
       >
         <Text> Logout</Text>
       </TouchableOpacity>
@@ -109,9 +104,13 @@ const CustomDrawer = (props) => {
   );
 };
 function App() {
+<<<<<<< HEAD
   const {  isFetching, isAuthenticated } = useSelector(authSelector);
+=======
+  const isAuthenticated = useSelector(authSelector);
+>>>>>>> 15a6fc3b596094b7cbbfb333ca1ddff2dc8f7b14
   return (
-    <SafeAreaProvider> 
+    <SafeAreaProvider>
     <MenuProvider>
       <NavigationContainer>
         {isFetching ? (
@@ -131,7 +130,7 @@ function App() {
                 name="drawer"
                 component={DrawerStack}
                 options={{ headerShown: false }}
-               
+
               />
             )}
             <Stack.Screen name="Details" component={GameDetailScreen} />

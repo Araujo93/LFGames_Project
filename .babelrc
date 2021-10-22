@@ -1,6 +1,7 @@
 {
   "plugins": [
-    ["module:react-native-dotenv"]
-    // ["@babel/plugin-transform-react-jsx"]
+    ["module:react-native-dotenv", {
+      "moduleName": "react-native-dotenv"
+    }]
   ]
 }
