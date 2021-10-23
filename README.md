@@ -15,3 +15,5 @@ run npm i on the server and the client root folders and then follow these instuc
 Contributors:
 
 Me, myself and I
+
+![LFGAMES desc](https://user-images.githubusercontent.com/82235400/138569900-7a4290e9-0eb8-4aa5-ab57-d64261d2f99e.jpeg)
