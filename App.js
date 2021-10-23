@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -15,42 +15,34 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { MenuProvider } from "react-native-popup-menu";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import HomeScreen from "./frontend/Screens/HomeScreen";
 import GameDetailScreen from "./frontend/Screens/GameDetailsScreen";
 import SignupScreen from "./frontend/Screens/SignupScreen";
 import SigninScreen from "./frontend/Screens/SigninScreen";
 import MyGamesScreen from "./frontend/Screens/MyGamesScreen";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
 import { Provider } from "react-redux";
-import { authSelector, authSlice } from "./frontend/redux/AuthSlice";
-import {
-  fetchUserByToken,
-  userSelector,
-  userSlice,
-} from "./frontend/redux/UserSlice";
-import { signOutUser, clearState } from "./frontend/redux/AuthSlice";
-import { getMyGameInfo } from "./frontend/redux/GameSlice";
-import store from "./frontend/redux/store";
+import { authSelector, signOut, signOutUser } from './frontend/redux/NewUserSlice';
+import { userSelector } from "./frontend/redux/UserSlice";
+import { store } from './frontend/redux/store';
 import { useSelector, useDispatch } from "react-redux";
 import AccountScreen from "./frontend/Screens/AccountScreen";
+import UserService from "./frontend/Services/UserService";
 
 const Auth = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-//AuthStack
 const AuthStack = () => (
   <Auth.Navigator>
     <Auth.Screen
-      name="signUp"
-      component={SignupScreen}
+      name="signIn"
+      component={SigninScreen}
       options={{ headerShown: false }}
     />
     <Auth.Screen
-      name="signIn"
-      component={SigninScreen}
+      name="signUp"
+      component={SignupScreen}
       options={{ headerShown: false }}
     />
   </Auth.Navigator>
@@ -71,7 +63,7 @@ const DrawerStack = () => (
 
 const CustomDrawer = (props) => {
   const dispatch = useDispatch();
-  const { email, userName, token } = useSelector(authSelector);
+  const { email, userName } = useSelector(userSelector);
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -92,6 +84,7 @@ const CustomDrawer = (props) => {
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
       <TouchableOpacity
+        onPress={() => dispatch(signOutUser())}
         style={{
           position: "absolute",
           bottom: 50,
@@ -100,8 +93,6 @@ const CustomDrawer = (props) => {
           backgroundColor: "#f6f6f6",
           padding: 20,
         }}
-        /// TODO LOGOUT a USER
-        onPress={() => dispatch(signOutUser(token))}
       >
         <Text> Logout</Text>
       </TouchableOpacity>
@@ -109,9 +100,9 @@ const CustomDrawer = (props) => {
   );
 };
 function App() {
-  const {  isFetching, isAuthenticated } = useSelector(authSelector);
+  const { isFetching, isAuthenticated } = useSelector(authSelector);
   return (
-    <SafeAreaProvider> 
+    <SafeAreaProvider>
     <MenuProvider>
       <NavigationContainer>
         {isFetching ? (
@@ -131,7 +122,7 @@ function App() {
                 name="drawer"
                 component={DrawerStack}
                 options={{ headerShown: false }}
-               
+
               />
             )}
             <Stack.Screen name="Details" component={GameDetailScreen} />

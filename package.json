@@ -1,11 +1,19 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "jest": {
+    "verbose": true,
+    "maxWorkers": 1,
+    "forceExit": true
+  },
   "scripts": {
     "start": "expo start",
+    "startserver": "tsc && nodemon index.ts",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "test": "jest --runInBand",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.8",
@@ -14,6 +22,8 @@
     "@react-navigation/native": "^6.0.4",
     "@react-navigation/native-stack": "^6.2.2",
     "@reduxjs/toolkit": "^1.6.1",
+    "@types/mongoose": "^5.11.97",
+    "@types/react-native-dotenv": "^0.2.0",
     "accordion-collapse-react-native": "^1.0.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -22,6 +32,7 @@
     "expo-secure-store": "^10.2.0",
     "expo-status-bar": "~1.0.4",
     "express": "^4.17.1",
+    "js-to-ts-converter": "^0.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.8",
     "react": "16.13.1",
@@ -35,12 +46,33 @@
     "react-native-safe-area-context": "^3.2.0",
     "react-native-safe-area-view": "^1.1.1",
     "react-native-screens": "^3.4.0",
+    "react-native-vector-icons": "^8.1.0",
     "react-native-web": "^0.13.18",
     "react-redux": "^7.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
-    "prettier": "^2.4.1"
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.5",
+    "@types/node": "^16.10.2",
+    "@types/react-native-vector-icons": "^6.4.9",
+    "@types/react-redux": "^7.1.18",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
+    "@typescript-eslint/parser": "^4.32.0",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.2",
+    "jest": "^27.2.4",
+    "prettier": "^2.4.1",
+    "supertest": "^6.1.6",
+    "ts-node": "^10.2.1",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3"
   },
   "private": true
 }
