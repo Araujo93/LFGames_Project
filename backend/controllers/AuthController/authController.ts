@@ -15,6 +15,7 @@ export const signIn = async (req: Request, res: Response) => {
     const user = await User.findOne({ email });
     const games = await user.populate('games');
     if (!user) {
+
       return res.status(404).send({ error: "Email not found" });
     }
 
@@ -26,6 +27,8 @@ export const signIn = async (req: Request, res: Response) => {
         const token = jwt.sign({ userId: user._id }, cfg.ACCESS_TOKEN_SECRET, {
           expiresIn: "7d",
         });
+        console.log('called')
+
         return res.status(200).send({ token, user, games });
       }
     });
@@ -36,7 +39,8 @@ export const signIn = async (req: Request, res: Response) => {
 };
 
 export const signOutUser = async (req: Request, res: Response) => {
-  try{
+  try {
+    console.log('CALLED')
     const _id: string = req.body.user._id;
     const token: string = req.body.token;
     const user = await User.findById(_id);

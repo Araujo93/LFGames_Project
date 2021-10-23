@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { View, Animated } from 'react-native';
 
 export class ParallaxScroll extends Component {
-	public props: any;
-	public parallaxHeaderHeight: any;
-	public stickyHeaderHeight: any;
-	public onSticky: any;
-	public fixedHeader: any;
-	public stickyHeader: any;
-	public parallaxHeader: any;
-	public scaleParallaxHeader: any;
-	public children: any;
-	public onRef: any;
+  public props: any;
+  public parallaxHeaderHeight: any;
+  public stickyHeaderHeight: any;
+  public onSticky: any;
+  public fixedHeader: any;
+  public stickyHeader: any;
+  public parallaxHeader: any;
+  public scaleParallaxHeader: any;
+  public children: any;
+  public onRef: any;
   static defaultProps = {
     scaleParallaxHeader: true,
   };
@@ -72,7 +72,8 @@ export class ParallaxScroll extends Component {
   }
 
   renderParallaxHeader() {
-    const { parallaxHeader, scaleParallaxHeader, parallaxHeaderHeight } = this.props;
+    const { parallaxHeader, scaleParallaxHeader, parallaxHeaderHeight } =
+      this.props;
 
     if (typeof parallaxHeader !== 'function') {
       return null;
@@ -111,7 +112,7 @@ export class ParallaxScroll extends Component {
           },
         },
       ],
-      { useNativeDriver: true },
+      { useNativeDriver: true }
     );
 
     return (

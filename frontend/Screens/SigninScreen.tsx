@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Text, Button, Input } from 'react-native-elements';
-import {
-  View, SafeAreaView, StyleSheet, Image,
-} from 'react-native';
+import { View, SafeAreaView, StyleSheet, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import UserService from '../Services/UserService'
+import UserService from '../Services/UserService';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { signIn } from '../redux/NewUserSlice'
-import { setGames } from '../redux/GameSlice'
+import { signIn } from '../redux/NewUserSlice';
+import { setGames } from '../redux/GameSlice';
+
 const img = require('../../assets/Logo.jpeg');
 
 const SigninScreen = ({ navigation }) => {
@@ -17,7 +16,7 @@ const SigninScreen = ({ navigation }) => {
     email: '',
     password: '',
   });
-  const [serverRes, setServerRes] = useState('')
+  const [serverRes, setServerRes] = useState('');
 
   const dispatch = useDispatch();
   const signInUser = async () => {
@@ -29,7 +28,7 @@ const SigninScreen = ({ navigation }) => {
     await AsyncStorage.setItem('token', res.token);
     dispatch(signIn(res.user));
     dispatch(setGames(res.games));
-  } 
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,10 +59,12 @@ const SigninScreen = ({ navigation }) => {
           label="Email Address"
           placeholder="email@example.com"
           value={userState.email}
-          onChangeText={(email) => setUserState({
-            ...userState,
-            email,
-          })}
+          onChangeText={(email) =>
+            setUserState({
+              ...userState,
+              email,
+            })
+          }
           autoCapitalize="none"
           autoCorrect={false}
         />
@@ -78,13 +79,8 @@ const SigninScreen = ({ navigation }) => {
           secureTextEntry
         />
         {<Text style={styles.error}>{serverRes}</Text>}
-        <Button
-          title="Sign In"
-          onPress={signInUser}
-        />
-        <TouchableOpacity
-          onPress={() => navigation.navigate('signUp')}
-        >
+        <Button title="Sign In" onPress={signInUser} />
+        <TouchableOpacity onPress={() => navigation.navigate('signUp')}>
           <Text style={styles.link}>Dont have an account? Go to Register!</Text>
         </TouchableOpacity>
       </View>

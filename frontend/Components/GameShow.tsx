@@ -4,9 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import { AntDesign } from 'react-native-vector-icons';
 import { Text, Image, Button } from 'react-native-elements';
 
-const GameShow = ({
-  game, addGameToList,
-}) => (
+const GameShow = ({ game, addGameToList }) => (
   <View style={styles.container}>
     <Image
       style={styles.imageStyle}
@@ -16,15 +14,9 @@ const GameShow = ({
     />
     <View style={styles.center}>
       {game.name.length > 25 ? (
-        <Text style={styles.title}>
-          {game.name.slice(0, 26).concat('...')}
-        </Text>
+        <Text style={styles.title}>{game.name.slice(0, 26).concat('...')}</Text>
       ) : (
-        <Text style={styles.title}>
-          {' '}
-          {game.name}
-          {' '}
-        </Text>
+        <Text style={styles.title}> {game.name} </Text>
       )}
 
       {game.platforms[0].name ? (
@@ -46,7 +38,7 @@ const GameShow = ({
       <Button
         buttonStyle={styles.move}
         icon={<AntDesign name="plus" size={22} style={styles.btn_style} />}
-        onPress={() => addGameToList( game )}
+        onPress={() => addGameToList({ ...game })}
       />
     </View>
   </View>

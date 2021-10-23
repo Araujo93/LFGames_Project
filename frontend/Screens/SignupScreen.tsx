@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Text, Button, Input } from 'react-native-elements';
-import {
-  View, SafeAreaView, StyleSheet, Image,
-} from 'react-native';
+import { View, SafeAreaView, StyleSheet, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -17,7 +15,7 @@ const SignupScreen = ({ navigation }) => {
     password: '',
   });
   const [serverRes, setServerRes] = useState('');
-  
+
   const submitForm = async () => {
     const res = await UserService.signUp(userState);
     if (res.error) {
@@ -32,7 +30,7 @@ const SignupScreen = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <View>
         <Image
-          source={require("../../assets/Logo.jpeg")}
+          source={require('../../assets/Logo.jpeg')}
           style={{
             width: 90,
             height: 90,
@@ -72,10 +70,11 @@ const SignupScreen = ({ navigation }) => {
           autoCapitalize="none"
           secureTextEntry
         />
-        {userState.userName && userState.email && userState.password 
-        ? <Button title="Sign Up" onPress={submitForm} />
-        : <Button title="Sign Up" disabled />
-        }
+        {userState.userName && userState.email && userState.password ? (
+          <Button title="Sign Up" onPress={submitForm} />
+        ) : (
+          <Button title="Sign Up" disabled />
+        )}
         <TouchableOpacity onPress={() => navigation.push('signIn')}>
           <Text style={styles.link}>
             {' '}

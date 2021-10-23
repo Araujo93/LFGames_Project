@@ -19,11 +19,13 @@ import GameService from '../Services/GameService';
 import Spacer from '../Components/Spacer';
 
 const renderParallaxHeader = (item) => {
-  return <Image
-    source={{ uri: item.cover.url }}
-    style={styles.imageStyle}
-    resizeMode="cover"
-  />
+  return (
+    <Image
+      source={{ uri: item.cover.url }}
+      style={styles.imageStyle}
+      resizeMode="cover"
+    />
+  );
 };
 
 const renderStickyHeader = (value, item) => {
@@ -49,7 +51,7 @@ const Screenshots = (item) => (
       numColumns={3}
       data={item.screenshots}
       listKey={(game) => game.url}
-      keyExtractor={ (item, index) => index.toString() }
+      keyExtractor={(item, index) => index.toString()}
       renderItem={(item) => (
         <Image
           style={{ width: 125, height: 125, margin: 5 }}
@@ -62,7 +64,8 @@ const Screenshots = (item) => (
 
 const windowWidth = Dimensions.get('window').width;
 
-const setDetailsParams = (id) => `fields id, name, summary, genres.name, rating,  total_rating, screenshots.url, first_release_date, cover.url, game_modes.name, cover.image_id, genres.name, platforms.name; where id = ${id};`;
+const setDetailsParams = (id) =>
+  `fields id, name, summary, genres.name, rating,  total_rating, screenshots.url, first_release_date, cover.url, game_modes.name, cover.image_id, genres.name, platforms.name; where id = ${id};`;
 
 const GameDetailScreen = ({ route }) => {
   const [gameDetails, setGameDetails] = useState([]);
@@ -95,7 +98,6 @@ const GameDetailScreen = ({ route }) => {
               parallaxHeader={() => renderParallaxHeader(item)}
               stickyHeader={(value: number) => renderStickyHeader(value, item)}
             >
-
               <View
                 style={{
                   flexDirection: 'column',
@@ -103,12 +105,9 @@ const GameDetailScreen = ({ route }) => {
                   width: windowWidth,
                 }}
               >
-                <Collapse
-                  isExpanded
-                  onToggle={() => setExpanded(!expanded)}
-                >
+                <Collapse isExpanded onToggle={() => setExpanded(!expanded)}>
                   <CollapseHeader>
-                  <Spacer />
+                    <Spacer />
                     <Text style={styles.headerText}>Summary</Text>
                   </CollapseHeader>
                   <CollapseBody>
@@ -117,59 +116,49 @@ const GameDetailScreen = ({ route }) => {
                   </CollapseBody>
                 </Collapse>
 
-                <Collapse
-                  isExpanded
-                  onToggle={() => setExpanded(!expanded)}
-                >
+                <Collapse isExpanded onToggle={() => setExpanded(!expanded)}>
                   <CollapseHeader>
-                    <Text style={styles.headerText}>
-                      Release Date & Rating
-                    </Text>
+                    <Text style={styles.headerText}>Release Date & Rating</Text>
                   </CollapseHeader>
                   <CollapseBody style={{ flexDirection: 'column' }}>
                     <Text style={styles.content}>
                       {`Released ${new Date(
-                        item.first_release_date * 1000,
-                        ).toDateString()}`}
-                      {' '}
+                        item.first_release_date * 1000
+                      ).toDateString()}`}{' '}
                     </Text>
                     <Text style={styles.content}>
-                      rating:
-                      {' '}
-                      {Math.floor(item.rating)}
-                      {' '}
-                      / 100
+                      rating: {Math.floor(item.rating)} / 100
                     </Text>
                     <Spacer />
                   </CollapseBody>
                 </Collapse>
 
-                <Collapse
-                  isExpanded
-                  onToggle={() => setExpanded(!expanded)}
-                >
+                <Collapse isExpanded onToggle={() => setExpanded(!expanded)}>
                   <CollapseHeader>
                     <Text style={styles.headerText}>Platforms</Text>
                   </CollapseHeader>
                   <CollapseBody>
-                    {item.platforms && item.platforms.map(platform => (
-                      <Text style={styles.content} key={platform.name}>{platform.name}</Text>
-                    ))}
-                  <Spacer />
+                    {item.platforms &&
+                      item.platforms.map((platform) => (
+                        <Text style={styles.content} key={platform.name}>
+                          {platform.name}
+                        </Text>
+                      ))}
+                    <Spacer />
                   </CollapseBody>
                 </Collapse>
 
-                <Collapse
-                  isExpanded
-                  onToggle={() => setExpanded(!expanded)}
-                >
+                <Collapse isExpanded onToggle={() => setExpanded(!expanded)}>
                   <CollapseHeader>
                     <Text style={styles.headerText}>Genres</Text>
                   </CollapseHeader>
                   <CollapseBody>
-                    {item.genres && item.genres.map(genre => (
-                      <Text style={styles.content} key={genre.name}>{genre.name}</Text>
-                    ))}
+                    {item.genres &&
+                      item.genres.map((genre) => (
+                        <Text style={styles.content} key={genre.name}>
+                          {genre.name}
+                        </Text>
+                      ))}
                   </CollapseBody>
                 </Collapse>
                 <View style={{ flexDirection: 'column', flexWrap: 'wrap' }}>

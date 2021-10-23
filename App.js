@@ -22,15 +22,16 @@ import SigninScreen from "./frontend/Screens/SigninScreen";
 import MyGamesScreen from "./frontend/Screens/MyGamesScreen";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from "react-redux";
-import { authSelector, userSelector } from "./frontend/redux/NewUserSlice";
+import { authSelector, signOut, signOutUser } from './frontend/redux/NewUserSlice';
+import { userSelector } from "./frontend/redux/UserSlice";
 import { store } from './frontend/redux/store';
 import { useSelector, useDispatch } from "react-redux";
 import AccountScreen from "./frontend/Screens/AccountScreen";
+import UserService from "./frontend/Services/UserService";
 
 const Auth = createNativeStackNavigator();
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
-const isFetching = false;
 
 const AuthStack = () => (
   <Auth.Navigator>
@@ -62,7 +63,7 @@ const DrawerStack = () => (
 
 const CustomDrawer = (props) => {
   const dispatch = useDispatch();
-  const { email, userName, token } = useSelector(userSelector);
+  const { email, userName } = useSelector(userSelector);
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -73,15 +74,9 @@ const CustomDrawer = (props) => {
             source={require("./assets/Logo.jpeg")}
             style={{ width: 80, height: 80, borderRadius: 30 }}
           />
-<<<<<<< HEAD
           <View> 
           <Text style={{fontSize: 18, fontWeight: 'bold'}}>{userName}</Text>
           
-=======
-          <View>
-          <Text style={{fontSize: 18, fontWeight: 'bold'}}>{userName}</Text>
-
->>>>>>> 15a6fc3b596094b7cbbfb333ca1ddff2dc8f7b14
           <Text>{email}</Text>
 
           </View>
@@ -89,6 +84,7 @@ const CustomDrawer = (props) => {
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
       <TouchableOpacity
+        onPress={() => dispatch(signOutUser())}
         style={{
           position: "absolute",
           bottom: 50,
@@ -104,11 +100,7 @@ const CustomDrawer = (props) => {
   );
 };
 function App() {
-<<<<<<< HEAD
-  const {  isFetching, isAuthenticated } = useSelector(authSelector);
-=======
-  const isAuthenticated = useSelector(authSelector);
->>>>>>> 15a6fc3b596094b7cbbfb333ca1ddff2dc8f7b14
+  const { isFetching, isAuthenticated } = useSelector(authSelector);
   return (
     <SafeAreaProvider>
     <MenuProvider>

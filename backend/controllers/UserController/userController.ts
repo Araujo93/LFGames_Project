@@ -28,7 +28,7 @@ export const createUser = async (req: Request, res: Response) => {
     if (!email || !password || !userName) {
       return res.status(422).send({ error: "Must provide email and password" });
     }
-
+    console.log('called')
     const user = await User.findOne({ email });
     if (user) {
       return res.status(422).send({ error: "Email already exists, Try again" });

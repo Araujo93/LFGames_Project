@@ -7,7 +7,7 @@ const URL = LOCAL_URL;
 export const fetchUserByToken = createAsyncThunk(
   'user/fetchUserByToken',
   async (thunkAPI) => {
-    const token = await AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token');
     try {
       const response = await fetch(`${URL}user`, {
         method: 'GET',
@@ -25,7 +25,7 @@ export const fetchUserByToken = createAsyncThunk(
     } catch (e) {
       return thunkAPI.rejectWithValue(e);
     }
-  },
+  }
 );
 
 export const userSlice = createSlice({

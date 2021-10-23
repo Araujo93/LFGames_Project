@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import {
-  View, Button, Text, StyleSheet,
-} from 'react-native';
+import { View, Button, Text, StyleSheet } from 'react-native';
 import { Avatar, BottomSheet, ListItem } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import Spacer from '../Components/Spacer';
-import { userSelector } from '../redux/NewUserSlice';
+import { userSelector } from '../redux/UserSlice';
 
 const AccountScreen = () => {
   const { email, userName } = useSelector(userSelector);
@@ -19,13 +17,9 @@ const AccountScreen = () => {
         icon={{ name: 'user', type: 'font-awesome' }}
       />
       <Spacer />
-      <Text style={styles.name}>
-        Username: {userName}
-      </Text>
+      <Text style={styles.name}>Username: {userName}</Text>
       <Spacer />
-      <Text style={styles.name}>
-        Email: {email}
-      </Text>
+      <Text style={styles.name}>Email: {email}</Text>
       <Spacer />
       <View style={styles.btn}>
         <Spacer />

@@ -10,8 +10,8 @@ interface IConfig {
 const config: IConfig = {
   PORT: process.env.PORT || '3000',
   ENV: process.env.ENV || 'test',
-  ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET as string,
-  MONGOURI: 'baduri',
+  ACCESS_TOKEN_SECRET: 'someSecret',
+  MONGOURI: 'mongodb+srv://sean:araujo93@cluster0.ngetw.mongodb.net/LFGames?retryWrites=true&w=majority',
 };
 
 if (config.ENV === 'test') {

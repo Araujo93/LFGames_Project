@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image,
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import { FlatList } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign, Feather } from 'react-native-vector-icons';
 import { gameSelector } from '../redux/GameSlice';
+import GameService from '../Services/GameService';
 
 const MyGamesScreen = () => {
   const { userGames } = useSelector(gameSelector);
   const navigation = useNavigation();
+  const [myGames, setMyGames] = useState([]);
+  const func = async () => {
+    const data = await GameService.getMyGameDetails();
+    setMyGames(data);
+  };
+
+  useEffect(() => {
+    func();
+  }, [userGames]);
 
   if (userGames.length < 1) {
     return (
@@ -19,7 +34,10 @@ const MyGamesScreen = () => {
           <Image
             source={require('../../assets/Logo.jpeg')}
             style={{
-              width: 125, height: 125, borderRadius: 30, marginTop: 50,
+              width: 125,
+              height: 125,
+              borderRadius: 30,
+              marginTop: 50,
             }}
           />
           <Text style={styles.noGameTitle}> No Games Yet</Text>
@@ -40,7 +58,7 @@ const MyGamesScreen = () => {
   return (
     <SafeAreaView style={styles.container1}>
       <FlatList
-        data={userGames}
+        data={myGames}
         keyExtractor={(user, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
@@ -60,16 +78,9 @@ const MyGamesScreen = () => {
                     {item.name.slice(0, 26).concat('...')}
                   </Text>
                 ) : (
-                  <Text style={styles.title}>
-                    {' '}
-                    {item.name}
-                    {' '}
-                  </Text>
+                  <Text style={styles.title}>{item.name}</Text>
                 )}
-                <Text style={styles.text}>
-                  {item.platforms[0].name}
-                  {' '}
-                </Text>
+                <Text style={styles.text}>{item.platforms[0].name}</Text>
                 <Text style={styles.text}>
                   Released:
                   {new Date(item.first_release_date * 1000).toDateString()}

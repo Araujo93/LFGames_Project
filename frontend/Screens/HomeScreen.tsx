@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
 import { Input } from 'react-native-elements';
-import { useDispatch } from 'react-redux';
 // @ts-ignore
 import { MaterialCommunityIcons, AntDesign } from 'react-native-vector-icons';
 import {
@@ -28,16 +24,21 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     getInfo(
-      'fields name, summary, genres.name, rating, first_release_date, game_modes.name, storyline, platforms.name, cover.url, cover.image_id; where release_dates.platform = (6, 48, 55, 167, 169, 49); limit 200;',
+      'fields name, summary, genres.name, rating, first_release_date, game_modes.name, storyline, platforms.name, cover.url, cover.image_id; where release_dates.platform = (6, 48, 55, 167, 169, 49); limit 200;'
     );
   }, []);
 
   const handleSearch = async () => {
+    if (!searchValue) {
+      const res = await GameService.getGameDetails(
+        'fields name, summary, genres.name, rating, first_release_date, game_modes.name, storyline, platforms.name, cover.url, cover.image_id; where release_dates.platform = (6, 48, 55, 167, 169, 49); limit 200;'
+      );
+      setGames(res);
+    }
     if (searchValue) {
       const re = new RegExp(searchValue, 'i');
       const filteredGames = games.filter((game) => re.test(game.name));
       setGames(filteredGames);
-      setSearchValue('');
     }
   };
 
@@ -56,45 +57,59 @@ const HomeScreen = ({ navigation }) => {
           </MenuTrigger>
           <MenuOptions>
             <MenuOption
-              onSelect={() => getInfo(
-                'fields name, summary, genres.name, rating, first_release_date, game_modes.name, storyline, platforms.name, cover.url, cover.image_id; where release_dates.platform = (6, 48, 55, 167, 169, 49); limit 200;',
-              )}
-              text='all'
+              onSelect={() =>
+                getInfo(
+                  'fields name, summary, genres.name, rating, first_release_date, game_modes.name, storyline, platforms.name, cover.url, cover.image_id; where release_dates.platform = (6, 48, 55, 167, 169, 49); limit 200;'
+                )
+              }
+              text="all"
             />
             <MenuOption
-              onSelect={() => getInfo(
-                'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 6; limit 200;',
-              )}
+              onSelect={() =>
+                getInfo(
+                  'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 6; limit 200;'
+                )
+              }
               text="PC"
             />
             <MenuOption
-              onSelect={() => getInfo(
-                'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 49; limit 200;',
-              )}
+              onSelect={() =>
+                getInfo(
+                  'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 49; limit 200;'
+                )
+              }
               text="Xbox"
             />
             <MenuOption
-              onSelect={() => getInfo(
-                'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 48; limit 200;',
-              )}
+              onSelect={() =>
+                getInfo(
+                  'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 48; limit 200;'
+                )
+              }
               text="Ps4"
             />
             <MenuOption
-              onSelect={() => getInfo(
-                'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 167; limit 200;',
-              )}
+              onSelect={() =>
+                getInfo(
+                  'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 167; limit 200;'
+                )
+              }
               text="Ps5"
             />
             <MenuOption
-              onSelect={() => getInfo(
-                'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 169; limit 200;',
-              )}
+              onSelect={() =>
+                getInfo(
+                  'fields *, platforms.name, cover.url, cover.image_id; where release_dates.platform = 169; limit 200;'
+                )
+              }
               text="Xbox X"
             />
             <MenuOption
-              onSelect={() => getInfo(
-                'fields name, summary, id, platforms.name, cover.url, cover.image_id; where release_dates.platform = 55; limit 200;',
-              )}
+              onSelect={() =>
+                getInfo(
+                  'fields name, summary, id, platforms.name, cover.url, cover.image_id; where release_dates.platform = 55; limit 200;'
+                )
+              }
               text="Mobile"
             />
           </MenuOptions>
@@ -110,7 +125,7 @@ const HomeScreen = ({ navigation }) => {
           placeholder="search"
           leftIcon={icon}
           onChangeText={(text) => setSearchValue(text)}
-          onSubmitEditing={() => handleSearch()}
+          onKeyPress={() => handleSearch()}
           value={searchValue}
         />
 

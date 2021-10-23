@@ -6,6 +6,7 @@ import cfg from '../config';
 
 export default async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
+console.log(authorization)
   if (!authorization) {
     return res.status(402).send({ error: 'you must be logged in' });
   }
@@ -18,6 +19,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     if (userBlacklist.length > 0) return res.status(402).send('Invalid token');
     req.body.user = user;
     req.body.token = token;
+
     return next();
   } catch (e) {
     return res.status(402).send('Must log in first');

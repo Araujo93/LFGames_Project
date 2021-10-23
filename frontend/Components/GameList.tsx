@@ -6,22 +6,19 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
 import GameShow from './GameShow';
 import GameService from '../Services/GameService';
-import { addGame } from '../redux/GameSlice'
-import { useDispatch } from 'react-redux';
+import { addGame } from '../redux/GameSlice';
 
-const GameList = ({
-  games,
-  navigation,
-}) => {
-
+const GameList = ({ games, navigation }) => {
   const dispatch = useDispatch();
   const [serverRes, setServerRes] = useState('');
 
   const addToList = async (game) => {
     const res = await GameService.addGameToList(game);
-    dispatch(addGame(game));
+    dispatch(addGame(res));
+    await GameService.getMyGameDetails();
     if (res.error) setServerRes(res.error);
     else setServerRes('Game added to list!');
   };
@@ -40,10 +37,7 @@ const GameList = ({
           <TouchableOpacity
             onPress={() => navigation.navigate('Details', { id: item.id })}
           >
-            <GameShow
-              game={item}
-              addGameToList={() => addToList(item)}
-            />
+            <GameShow game={item} addGameToList={() => addToList(item)} />
           </TouchableOpacity>
         )}
       />

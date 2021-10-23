@@ -1,6 +1,6 @@
 // @ts-ignore
 import { LOCAL_URL } from 'react-native-dotenv';
-import { IUserInfo, IUserService } from '../types/types'
+import { IUserInfo, IUserService } from '../types/types';
 
 const UserService: IUserService = {
   signUp: () => {},
@@ -29,6 +29,7 @@ UserService.signIn = async (body: IUserInfo) => {
     },
     body: JSON.stringify(body),
   });
+
   return res.json();
 };
 

@@ -1,7 +1,7 @@
 // @ts-ignore
 import { LOCAL_URL, CLIENT_ID, API_TOKEN } from 'react-native-dotenv';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IGamesService } from '../types/types'
+import { IGamesService } from '../types/types';
 
 const GameService: IGamesService = {
   addGameToList: () => {},
@@ -21,7 +21,26 @@ GameService.addGameToList = async (game) => {
     },
     body: JSON.stringify(game),
   });
+
   const data = await res.json();
+  return data;
+};
+
+GameService.getMyGameDetails = async () => {
+  const token = await AsyncStorage.getItem('token');
+
+  const response = await fetch(`${LOCAL_URL}games`, {
+    method: 'GET',
+    credentials: 'include',
+    mode: 'cors',
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`,
+      'content-type': 'application/json',
+    },
+  });
+  const data = await response.json();
+  // console.log('DATA', data);
   return data;
 };
 
@@ -37,6 +56,7 @@ GameService.getGameDetails = async (gameDetails) => {
       body: gameDetails,
     });
     const data = await response.json();
+    // console.log("DATA", data);
     data.forEach((game) => {
       if (game.cover) {
         game.cover.url = `http://images.igdb.com/igdb/image/upload/t_cover_big/${game.cover.image_id}.jpg`;
@@ -49,4 +69,3 @@ GameService.getGameDetails = async (gameDetails) => {
 };
 
 export default GameService;
-
