@@ -16,4 +16,7 @@ Contributors:
 
 Me, myself and I
 
+
+![LFGames Home](https://user-images.githubusercontent.com/82235400/138569917-73f8e8da-415b-4fe2-888d-ebc78fa81887.jpeg)
+
 ![LFGAMES desc](https://user-images.githubusercontent.com/82235400/138569900-7a4290e9-0eb8-4aa5-ab57-d64261d2f99e.jpeg)
