@@ -1,7 +1,12 @@
-# LFGames_Project
-Lfgames is a react native app that allows users to find/collect games and gives information for each game
-The project was built using expo so to install and run the app you must have set up expo cli and download android studio.
+LF Games
+About The Project
+LF Games is a React Native app thats allows users to look for games and share tips and tricks .
 
-Tech Stack: React Native, Redux ToolKit, MongoDb, Mongoose, Node, TypeScript.
+Built With
+React Native, Redux ToolKit, Express, Node, Jest, Mongoose, MongoDB, TypeScript.
 
-Contributers: Me, myself and I.
+Getting Started
+run npm i on the server and the client root folders and then follow these instuctions to run the app on an android emulator: https://reactnative.dev/docs/running-on-device
+
+Contributors
+Me, myself and I
